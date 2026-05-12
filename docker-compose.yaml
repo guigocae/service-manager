@@ -1,0 +1,39 @@
+v             vvvvvvvvvvvvvvvvvvvvvvvvvkjhservices:
+  postgres:
+    image: postgres:16
+    container_name: postgres16-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: devdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres16_data:/var/lib/postgresql/data
+    networks:
+      - dev-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin-dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - dev-network
+
+volumes:
+  postgres16_data:
+  pgadmin_data:
+
+networks:
+  dev-network:
+    driver: bridge
