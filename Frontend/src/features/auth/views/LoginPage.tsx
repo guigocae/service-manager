@@ -21,6 +21,7 @@ import {
   loginSchema 
 } from "../types/auth.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 
 export default function LoginPage() {
@@ -111,7 +112,7 @@ export default function LoginPage() {
               className="w-full"
               disabled={loginMutation.isPending}
             >
-              {loginMutation.isPending ? "Aguarde..." : "Login"}
+              {loginMutation.isPending ? <Spinner /> : "Login"}
             </Button>
           </CardFooter>
         </form>

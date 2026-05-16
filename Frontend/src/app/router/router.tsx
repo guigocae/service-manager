@@ -16,9 +16,19 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
 
-    children: routes.map(({ path, element }) => ({
-      ...(path === "/" ? { index: true } : { path: path.slice(1) }),
-      element,
-    }))
+    children: routes.map((route) => {
+      if (route.path === "/") {
+        return {
+          index: true,
+          element: route.element,
+        };
+      }
+
+      return {
+        path: route.path.slice(1),
+        element: route.element,
+        children: route.children,
+      };
+    }),
   },
 ]);

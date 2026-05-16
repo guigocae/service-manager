@@ -1,45 +1,23 @@
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Avatar, AvatarFallback } from "../ui/avatar"
-import { Button } from "../ui/button"
-import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { Separator } from "../ui/separator"
-import { ChevronRight, PanelLeftCloseIcon, PanelRightCloseIcon } from "@hugeicons/core-free-icons"
+import { ChevronRight } from "@hugeicons/core-free-icons"
 import { useLocation } from "react-router-dom"
 import { routes } from "@/app/router/routes"
+import { SidebarTrigger } from "../ui/sidebar"
+import { Avatar } from "../ui/avatar"
 
-
-
-type AppHeaderProps = {
-  collapsed?: boolean;
-  onToggle?: () => void;
-}
-
-export function AppHeader({ collapsed, onToggle }: AppHeaderProps) {
+export function AppHeader() {
   const location = useLocation();
   const current = routes.find((r) => r.path === location.pathname);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-slate-200 bg-white/80 px-4 backdrop-blur-md">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onToggle}
-        className="text-slate-500 hover:text-slate-800"
-      >
-        {collapsed ? (
-          <HugeiconsIcon icon={PanelRightCloseIcon} size={18} />
-        ) : (
-          <HugeiconsIcon icon={PanelLeftCloseIcon} size={18} />
-        )}
-      </Button>
-
-      <Separator orientation="vertical" className="h-5" />
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-3 bg-background/80 px-4 backdrop-blur-md">
+      <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-1 text-sm text-slate-500">
+      <nav className="flex items-center gap-1 text-sm text-muted-foreground">
         <span>Service Manager</span>
         <HugeiconsIcon icon={ChevronRight} size={14} />
-        <span className="font-medium text-slate-800">
+        <span className="font-medium text-foreground">
           {current?.label ?? "Page"}
         </span>
       </nav>
@@ -48,7 +26,9 @@ export function AppHeader({ collapsed, onToggle }: AppHeaderProps) {
       <div className="flex-1"></div>
 
       <div className="relative hidden sm:block">
-
+        <Avatar>
+          
+        </Avatar>
       </div>
 
     </header>
