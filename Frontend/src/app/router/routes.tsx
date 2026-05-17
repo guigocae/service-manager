@@ -9,9 +9,7 @@ function DashboardPage() {
 }
 
 function ServiceOrdersLayout() {
-  return (
-    <Outlet />
-  )
+  return <Outlet />
 }
 function ServiceOrdersPage() {
   return <h1>Ordens de Serviço</h1>
